@@ -112,6 +112,41 @@ no shutdown
 
             // Configuring OSPF//
 
------------------- OSPF Confi10guration On R1---------------------------------------
+------------------ OSPF Configuration On R1---------------------------------------
 R1(Config)#router ospf 10                                       // where 10is the process id we can choose peocess id from 1 to 65535 //
-R1(router-Config)network 10.0.0.0 0.255.255.255            // 10.0.0 is the one network id of ip  address 
+R1(router-Config)network 10.0.0.0 0.255.255.255 area 1       // 10.0.0.0 is the one network id of ip  address and 0.255.255.255 is the wildcard mask of that network
+R1(router-Config)network 20.0.0.0 0.255.255.255 area 0       // configuring two areas for ospf..
+
+// to run ospf successfully one of the interface of the router should be in the area 0 //
+--------------------------------------------------------------------------------------
+
+------------------ OSPF Configuration On R2-------------------------------------------
+R2(Config)#router ospf 10
+R2(router-Config)network 10.0.0.0 0.255.255.255 area 1 
+R2(router-Config)network 40.0.0.0 0.255.255.255 area 1
+------------------------------------------------------------------------------------
+
+-------------- OSPF Configuration On R3---------------------------------------------
+R3(Config)#router ospf 10
+R3(router-Config)network 30.0.0.0 0.255.255.255 area 0
+R3(router-Config)network 40.0.0.0 0.255.255.255 area 1
+------------------------------------------------------------------------------------
+
+---------------OSPF Configuration On R4---------------------------------------------
+R4(Config)#router ospf 10
+R4(router-Config)network 20.0.0.0 0.255.255.255 area 0
+R4(router-Config)network 30.0.0.0 0.255.255.255 area 0
+R4(router-Config)network 50.0.0.0 0.255.255.255 area 0
+R4(router-Config)network 80.0.0.0 0.255.255.255 area 0
+------------------------------------------------------------------------------------
+
+-------------- OSPF Configuration on R5---------------------------------------------
+R5(Config)#router ospf 10
+R5(router-Config)network 50.0.0.0 0.255.255.255 area 0
+R5(router-Config)network 60.0.0.0 0.255.255.255 area 0
+----------------------------------------------------------------------------------
+
+-------------- OSPF Configuration On R6-------------------------------------------
+R6(router-Config)network 60.0.0.0 0.255.255.255 area 0
+R6(router-Config)network 70.0.0.0 0.255.255.255 area 0
+----------------------------------------------------------------------------------
